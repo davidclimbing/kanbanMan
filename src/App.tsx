@@ -1,16 +1,18 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Card from "./components/task-card/task-card.tsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const title = "Do Market Research"
+  const id = "BUS-1"
+  const points = 5
 
   return (
     <>
-      <div className="text-4xl text-red-500">
-          Hello
-      </div>
+      <Card title={title} id={id} points={points}></Card>
+      <Card title={title} id={id} points={points}></Card>
+      <Card title={title} id={id} points={points}></Card>
+      <Card title={title} id={id} points={points}></Card>
+      <Card title={title} id={id} points={points}></Card>
     </>
   )
 }
