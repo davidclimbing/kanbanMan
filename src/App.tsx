@@ -1,18 +1,19 @@
 import './App.css'
 import Card from "./components/task-card/task-card.tsx";
+import {Task} from "./schemas/task.ts";
 
 function App() {
-  const title = "Do Market Research"
-  const id = "BUS-1"
-  const points = 5
+  const task: Task = {
+    title: 'Do Market Research',
+    id: 'BUS-1',
+    points: 5,
+  }
 
   return (
     <>
-      <Card title={title} id={id} points={points}></Card>
-      <Card title={title} id={id} points={points}></Card>
-      <Card title={title} id={id} points={points}></Card>
-      <Card title={title} id={id} points={points}></Card>
-      <Card title={title} id={id} points={points}></Card>
+      <Card task={task} />
+      <Card task={task} />
+      <Card task={task} />
     </>
   )
 }
