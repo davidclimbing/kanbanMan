@@ -14,9 +14,12 @@ const lowPriority = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox=
 </svg>
 
 
-const Card = ({task}: {
+const Card = ({task, updateTaskPoints}: {
   task: Task
+  updateTaskPoints: (task: Task, points: number) => void
 }) => {
+  const points = task.points || 0
+
   return <div className="text-3xl border rounded-lg px-2 m-2 bg-gray-50 w-80">
     <div className="text-base font-base py-2">
       {task.title}
@@ -29,9 +32,14 @@ const Card = ({task}: {
         {task.priority === 'medium' && mediumPriority}
         {task.priority === 'low' && lowPriority}
       </div>
-      <div>{task.points}</div>
+      <div className="flex gap-2 items-center">
+        <button onClick={() => updateTaskPoints(task, points - 1)}>-</button>
+        <div className="font-bold">{points}</div>
+        <button onClick={() => updateTaskPoints(task, points + 1)}>+</button>
+      </div>
     </div>
   </div>
 }
+
 
 export default Card
