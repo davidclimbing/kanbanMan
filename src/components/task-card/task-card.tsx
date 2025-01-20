@@ -1,4 +1,5 @@
 import {Task} from "../../schemas/task.ts";
+import {useState} from "react";
 
 const highPriority = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                           stroke="red" className="size-6">
@@ -14,10 +15,11 @@ const lowPriority = <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox=
 </svg>
 
 
-const Card = ({task, updateTaskPoints}: {
+const Card = ({task, updateTask}: {
   task: Task
-  updateTaskPoints: (task: Task, points: number) => void
+  updateTask: (task: Task) => void
 }) => {
+  const [isEditingTitle, setIsEditingTitle] = useState<boolean>(false);
   const points = task.points || 0
   const updatePoints = (direction: 'up' | 'down') => {
     const fib = [0, 1, 2, 3, 5, 8, 13]
@@ -25,13 +27,25 @@ const Card = ({task, updateTaskPoints}: {
     const nextIndex = direction === 'up' ? index + 1 : index - 1
     const newPoints = fib[nextIndex]
     if(newPoints) {
-      updateTaskPoints(task, newPoints)
+      updateTask({...task, points: newPoints})
     }
   }
 
-  return <div className="text-3xl border rounded-lg px-2 m-2 bg-gray-50 w-80">
+  return <div className="border rounded-lg px-2 m-2 bg-gray-50 w-56">
     <div className="text-base font-base py-2">
-      {task.title}
+      {isEditingTitle ? (
+          <input
+            autoFocus
+            className="w-full"
+            onBlur={() => setIsEditingTitle(false)}
+            value={task.title}
+            onChange={(e) => updateTask({...task, title: e.target.value})}
+          />
+        ) :
+        <div onClick={() => setIsEditingTitle(true)}>
+          {task.title}
+        </div>
+      }
     </div>
     <div className="flex gap-4 justify-between py-2 text-gray-500 text-sm">
       <div className="flex gap-2">

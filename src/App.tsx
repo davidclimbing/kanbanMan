@@ -15,17 +15,10 @@ function App() {
     }
   })
 
-  const updateTaskPoints = (task: Task, points: number) => {
+  const updateTask = (task: Task) => {
     const updatedTasks = tasks.map((t) => {
-      if (t.id === task.id) {
-        return {
-          ...t,
-          points,
-        }
-      } else {
-        return t;
-      }
-    });
+      return t.id === task.id ? task : t;
+    })
     setTasks(updatedTasks);
   }
 
@@ -40,7 +33,7 @@ function App() {
             {column.tasks.map((task) => (
               <Card
                 task={task}
-                updateTaskPoints={updateTaskPoints}
+                updateTask={updateTask}
               />
             ))}
           </div>
