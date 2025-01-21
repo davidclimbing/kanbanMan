@@ -1,12 +1,12 @@
 import './App.css'
 import Card from "./components/task-card/task-card.tsx";
-import {tasks as initialTasks, statuses} from "./tasks/task.ts";
+import {statuses} from "./tasks/task.ts";
 import {Status, Task} from "./schemas/task.ts";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>(initialTasks);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const columns = statuses.map((status) => {
     const tasksInColumn = tasks.filter((task) => task.status === status);
     return {
@@ -15,7 +15,23 @@ function App() {
     }
   })
 
+  useEffect(() => {
+    fetch('http://localhost:3000/tasks').then((resp: Response) => resp.json()).then((data) => {
+      setTasks(data);
+    })
+  }, [])
+
+
   const updateTask = (task: Task) => {
+    fetch(`http://localhost:3000/${task.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(task),
+    })
+
+
     const updatedTasks = tasks.map((t) => {
       return t.id === task.id ? task : t;
     })
