@@ -23,15 +23,13 @@ function App() {
 
 
   const updateTask = (task: Task) => {
-    fetch(`http://localhost:3000/${task.id}`, {
+    fetch(`http://localhost:3000/tasks/${task.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(task),
     })
-
-
     const updatedTasks = tasks.map((t) => {
       return t.id === task.id ? task : t;
     })

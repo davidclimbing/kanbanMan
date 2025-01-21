@@ -30,7 +30,7 @@
     {
       "title": "Do Market Research",
       "id": "BUS-5",
-      "status": "done",
+      "status": "in-progress",
       "priority": "high",
       "points": 5
     },
@@ -39,7 +39,7 @@
       "id": "BUS-6",
       "status": "in-progress",
       "priority": "high",
-      "points": 5
+      "points": 8
     },
     {
       "title": "Do Market Research",
@@ -58,7 +58,7 @@
     {
       "title": "Do Market Research",
       "id": "BUS-9",
-      "status": "done",
+      "status": "in-progress",
       "priority": "low",
       "points": 5
     }
